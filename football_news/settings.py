@@ -40,7 +40,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://walyulahdi-maulana-footballnews.pbp.cs.ui.ac.id/"
+    "https://walyulahdi-maulana-footballnews.pbp.cs.ui.ac.id"
 ]
 
 # Application definition
