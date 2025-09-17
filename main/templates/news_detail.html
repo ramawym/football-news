@@ -1,5 +1,4 @@
-{% extends 'base.html' %} 
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <p>
   <a href="{% url 'main:show_main' %}"><button>← Back to News List</button></a>
@@ -19,4 +18,8 @@
 
 <p>{{ news.content }}</p>
 
-{% endblock content %}
+{% if news.user %}
+<p>Author: {{ news.user.username }}</p>
+{% else %}
+<p>Author: Anonymous</p>
+{% endif %} {% endblock content %}
