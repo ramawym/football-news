@@ -15,7 +15,7 @@ from django.urls import reverse
 # Create your views here.
 @login_required(login_url="/login")
 def show_main(request):
-    filter_type = request.GET.get("filter", "all") 
+    filter_type = request.GET.get("filter", "all")
 
     if filter_type == "all":
         news_list = News.objects.all()
@@ -44,6 +44,24 @@ def create_news(request):
 
     context = {"form": form}
     return render(request, "create_news.html", context)
+
+
+def edit_news(request, id):
+    news = get_object_or_404(News, pk=id)
+    form = NewsForm(request.POST or None, instance=news)
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return redirect("main:show_main")
+
+    context = {"form": form}
+
+    return render(request, "edit_news.html", context)
+
+
+def delete_news(request, id):
+    news = get_object_or_404(News, pk=id)
+    news.delete()
+    return HttpResponseRedirect(reverse("main:show_main"))
 
 
 @login_required(login_url="/login")
